@@ -24,6 +24,9 @@ module Everyleaf
                        controller_specs: false,
                        request_specs: false
       g.fixture_replacement :factory_bot, dir: "spec/factories"
-    end
+    end  
+    # Cairo has the same time zone with Kigali Rwanda
+    config.time_zone = 'Cairo'
+    config.active_record.default_timezone= :local   
   end
 end
