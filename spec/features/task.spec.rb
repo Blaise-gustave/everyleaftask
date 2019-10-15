@@ -11,8 +11,7 @@ RSpec.feature "Task management function", type: :feature do
     # visit to tasks_path (transition to  task list page)
     visit tasks_path
   
-    # write a test to verify that the string "testtesttest"  "samplesample " is included when accessing the task list page using have_content method
-  
+     
     expect(page).to have_content 'football'
     expect(page).to have_content 'bicycle'
   end

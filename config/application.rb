@@ -10,10 +10,12 @@ module Everyleaf
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
-
+   # Cairo has the same time zone with Kigali Rwanda
+   config.time_zone = 'Cairo'
+   config.active_record.default_timezone= :local
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded after loading
+    # -- all .rb files in that directory are automatically loaded after loadingt
     # the framework and any gems in your application.
     config.generators do |g|
       g.test_framework :rspec,
@@ -24,6 +26,6 @@ module Everyleaf
                        controller_specs: false,
                        request_specs: false
       g.fixture_replacement :factory_bot, dir: "spec/factories"
-    end
+    end     
   end
 end
