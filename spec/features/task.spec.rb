@@ -28,6 +28,25 @@ RSpec.feature "Task management function", type: :feature do
   end
 
   scenario "Test task details" do
-
+    visit  new_task_path
+    fill_in  'Name' ,  with: 'grettings'
+    fill_in  'details' ,  with: 'test'
+    click_on 'Create Task'
+    click_on 'Back'
+    click_on 'Show'
+    expect(page).to have_text('test')
+  end
+  scenario "Check validation of task name" do
+    task=Task.new('name': ' ', 'details': 'everleaf ')
+    expect(task).not_to be_valid
+  
+    end
+ scenario "Check validation of task details" do
+ task=Task.new('name': 'Blaise', 'details': ' ')
+ expect(task).not_to be_valid
+ end
+ scenario "Test whether tasks are arranged in descending order of creation date" do
+  assert Task.order('created_at DESC')
   end
 end
+
