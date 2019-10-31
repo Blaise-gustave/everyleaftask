@@ -18,8 +18,8 @@
       <tr>
         <td><%= task.name %></td>
         <td><%= task.details %></td>
-        <td><%= task.start %></td>
-        <td><%= task.endtime %></td>
+        <td><%= task.startdate %></td>
+        <td><%= task.enddate %></td>
 
 
         <td><%= link_to 'Show', task %></td>
@@ -31,5 +31,5 @@
 </table>
 
 <br>
-
+<%= link_to 'sort by deadline', tasks_path(sort_expired: 'true'), class: 'btn btn-outline-primary' %>
 <%= link_to 'New Task', new_task_path %>

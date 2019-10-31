@@ -41,6 +41,11 @@ RSpec.feature "Task management function", type: :feature do
     expect(task).not_to be_valid
   
     end
+    scenario 'task descending buy deadline' do
+      task=Task.all
+       # status is column that is holding priority High,medium and finally low
+      assert task.order('enddate DESC')
+    end
  scenario "Check validation of task details" do
  task=Task.new('name': 'Blaise', 'details': ' ')
  expect(task).not_to be_valid
