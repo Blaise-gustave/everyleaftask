@@ -30,7 +30,7 @@ RSpec.feature "Task management function", type: :feature do
   scenario "Test task details" do
     visit  new_task_path
     fill_in  'Name' ,  with: 'grettings'
-    fill_in  'details' ,  with: 'test'
+    fill_in  'Details' ,  with: 'test'
     click_on 'Create Task'
     click_on 'Back'
     click_on 'Show'

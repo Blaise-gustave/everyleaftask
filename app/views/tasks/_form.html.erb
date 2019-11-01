@@ -27,6 +27,11 @@
   <%= form.label :deadline %>
   <%= form.date_select :enddate %>
 </div>
+<div class="field">
+ <p><%= form.label :Status %>
+   <%= form.radio_button :status, 'Not_started' %> Not_started  <%= form.radio_button :status, 'Undertaking' %> Undertaking <%= form.radio_button :statuses, 'Completed' %> Completed<br />
+ </p>
+</div>
 
   <div class="actions">
     <%= form.submit %>
