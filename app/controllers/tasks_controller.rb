@@ -2,11 +2,12 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
     if params[:sort_expired]
-      @tasks = Task.order('enddate DESC')
+      @tasks = Task.order('enddate DESC').page(params[:page])
     elsif params[:term]
-      @tasks = Task.where('name LIKE ? or status LIKE ? ', "%#{params[:term]}%", "%#{params[:term]}%")
+      @tasks = Task.where('name LIKE ? or status LIKE ? ', "%#{params[:term]}%", "%#{params[:term]}%").page(params[:page])
     else
-      @tasks = Task.all.order("created_at asc")
+      @tasks = Task.all.order("created_at asc").page(params[:page])
+      @tasks = Task.all.order("priority desc").page(params[:page])
     end
   end 
   def show
@@ -53,6 +54,6 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
     end
     def task_params
-      params.require(:task).permit(:name, :details, :status, :startdate, :enddate)
+      params.require(:task).permit(:name, :details, :status, :priority, :startdate, :enddate)
     end
 end

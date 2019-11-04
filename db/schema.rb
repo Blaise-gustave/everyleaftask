@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2019_10_31_102923) do
     t.datetime "start"
     t.datetime "endtime"
     t.string "status"
+    t.integer "priority"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "startdate"

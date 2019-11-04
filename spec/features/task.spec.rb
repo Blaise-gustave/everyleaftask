@@ -50,6 +50,10 @@ RSpec.feature "Task management function", type: :feature do
  task=Task.new('name': 'Blaise', 'details': ' ')
  expect(task).not_to be_valid
  end
+ scenario 'task descending buy priority' do
+  task=Task.all
+  assert task.order('priority DESC')
+end
  scenario "Test whether tasks are arranged in descending order of creation date" do
   assert Task.order('created_at DESC')
   end

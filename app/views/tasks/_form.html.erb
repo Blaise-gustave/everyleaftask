@@ -28,6 +28,11 @@
   <%= form.date_select :enddate %>
 </div>
 <div class="field">
+   <p><%= form.label :Priority %>
+     <%= form.radio_button :priority, 'low' %> low  <%= form.radio_button :priority, 'medium' %> medium <%= form.radio_button :priority, 'high' %> high<br />
+   </p>
+ </div>
+<div class="field">
  <p><%= form.label :Status %>
    <%= form.radio_button :status, 'Not_started' %> Not_started  <%= form.radio_button :status, 'Undertaking' %> Undertaking <%= form.radio_button :statuses, 'Completed' %> Completed<br />
  </p>
