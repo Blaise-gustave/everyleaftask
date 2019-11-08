@@ -4,37 +4,46 @@ require 'rails_helper'
 # On the right side of this RSpec.feature, write the test item name like "task management feature" (grouped by do ~ end)
 RSpec.feature "Task management function", type: :feature do
   # In scenario (alias of it), write the processing of the test for each item you want to check.
+  background  do
+    User.create!(fullname: "blaise", email: 'ni@gmail.Com',password: '1234567')
+  
+ end
+#  background  do
+#     visit  root_path
+#     fill_in  'Email',  with: 'ni@gmail.Com'
+#     fill_in  'Password' ,  with: '1234567'
+#     click_on  'Log in'
+#     expect(page).to have_content 'User was successfully created.'
+#  end
+  
+
   scenario "Test task list" do
-    Task.create!(name: 'adali', details: 'football')
-    Task.create!(name: 'patrick', details: 'bicycle')
+    @user=User.first
+    Task.create!(name: 'adali', details: 'football', status:'Done', user_id: @user.id)
+    Task.create!(name: 'patrick', details: 'bicycle', status:'Done', user_id: @user.id)
   
-    # visit to tasks_path (transition to task list page)
-    visit tasks_path
-  
-     
-    expect(page).to have_content 'football'
-    expect(page).to have_content 'bicycle'
+    task=Task.all
+     assert task
   end
 
+
   scenario "Test task creation" do
-    visit new_task_path
-    fill_in 'Name', with: 'pazo'
-    fill_in 'Details', with: 'swiming'
-    click_button 'Create Task'
-    visit tasks_path
-    Task.create!(name: 'adali', details: 'pazo')
-    Task.create!(name: 'patrick', details: 'swiming')
+    @user=User.first
+    Task.create!(name: 'adali', details: 'pazo', status:'Done',user_id: @user.id )
+    
+    task=Task.last
+    expect(task.name).to match("adali")
+ 
 
   end
 
   scenario "Test task details" do
-    visit  new_task_path
-    fill_in  'Name' ,  with: 'grettings'
-    fill_in  'Details' ,  with: 'test'
-    click_on 'Create Task'
-    click_on 'Back'
-    click_on 'Show'
-    expect(page).to have_text('test')
+    @user=User.first
+    Task.create!(name: 'adali', details: 'pazo',status:'Done',user_id: @user.id )
+    task=Task.last
+    expect(task.name).to match("adali")
+ 
+    
   end
   scenario "Check validation of task name" do
     task=Task.new('name': ' ', 'details': 'everleaf ')

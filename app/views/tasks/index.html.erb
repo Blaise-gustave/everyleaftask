@@ -1,43 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tasks</h1>
-<%= form_tag(tasks_path, method: :get) do  %>
-  <div class="form-inline my-2 my-lg-0">
-    <%= text_field_tag :term, params[:term], class: "form-control mr-sm-2", placeholder: "Search with status " %>
-    <%= submit_tag 'Search', class: "btn btn-outline-success my-2 my-sm-0"  %>
-  </div>
-<% end %>
-
-<table>
+<h1 style="text-align:center;">Tasks</h1>
+<table class="table" style="width:60rem;margin-left:25rem;background-color:#4dd599">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Details</th>
-      <th>Start</th>
-      <th>Endtime</th>
-      <th>Priority</th>
-      <th colspan="3"></th>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Details</th>
+      <th scope="col">StartDate</th>
+      <th scope="col">EndDate</th>
+      <th scope="col">Priority</th>
+      <th scope="col">Status</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
-
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
+        <th scope="row"><%= task.id %></th>
         <td><%= task.name %></td>
         <td><%= task.details %></td>
         <td><%= task.startdate %></td>
         <td><%= task.enddate %></td>
         <td><%= task.priority %></td>
-
-
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= task.status %></td>
+        <td>
+          <%= link_to 'Show', task, class:"btn btn-outline-success my-2 my-sm-0", style:"color:black" %>
+          <%= link_to 'Edit', edit_task_path(task), class:"btn btn-outline-primary my-2 my-sm-0",  style:"color:black" %>
+          <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger my-2 my-sm-0",  style:"color:black" %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <%= paginate @tasks %>
 <br>
-<%= link_to 'sort by deadline', tasks_path(sort_expired: 'true'), class: 'btn btn-outline-primary' %>
-<%= link_to 'New Task', new_task_path %>
+<%= link_to 'sort by deadline', tasks_path(sort_expired: 'true'), class: 'btn btn-outline-warning', style:"color:black" %>
+

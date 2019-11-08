@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :authorize, only: [:new, :show, :edit, :update, :destroy, :index]
   def index
     if params[:sort_expired]
       @tasks = Task.order('enddate DESC').page(params[:page])
@@ -13,12 +14,12 @@ class TasksController < ApplicationController
   def show
   end
   def new
-    @task = Task.new
+    @task = current_user.tasks.build
   end
   def edit
   end
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
 
     respond_to do |format|
       if @task.save

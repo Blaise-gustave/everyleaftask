@@ -4,4 +4,5 @@ class Task < ApplicationRecord
     enum priority: [:low, :medium, :high ]
     paginates_per 2
     validates :status, presence:true
+    belongs_to :user
 end

@@ -1,3 +1,4 @@
+<center>
 <%= form_with(model: task, local: true) do |form| %>
   <% if task.errors.any? %>
     <div id="error_explanation">
@@ -10,35 +11,41 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="row" style="width:60rem;">
+    <div class="col-md-6">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class:"form-control", placeholder:"Enter Names" %>
+    </div>
+    <div class="col-md-6">
+    <%= form.label :details %>
+    <%= form.text_field :details, class:"form-control", placeholder:"Enter Details" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :details %>
-    <%= form.text_field :details %>
+  <div class="row" style="width:60rem;">
+    <div class="col-md-6">
+      <%= form.label :startdate %><br>
+      <%= form.date_select :startdate, class:"form-control" %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :deadline %><br>
+      <%= form.date_select :enddate, class:"form-control" %>
+    </div>
   </div>
-  <div class="field">
-  <%= form.label :start %>
-  <%= form.date_select :startdate %>
-</div>
-<div class="field">
-  <%= form.label :deadline %>
-  <%= form.date_select :enddate %>
-</div>
-<div class="field">
-   <p><%= form.label :Priority %>
+<div class="form-group">
+   <p><%= form.label :Priority %><br>
      <%= form.radio_button :priority, 'low' %> low  <%= form.radio_button :priority, 'medium' %> medium <%= form.radio_button :priority, 'high' %> high<br />
    </p>
  </div>
-<div class="field">
- <p><%= form.label :Status %>
+<div class="form-group">
+ <p><%= form.label :Status %><br>
    <%= form.radio_button :status, 'Not_started' %> Not_started  <%= form.radio_button :status, 'Undertaking' %> Undertaking <%= form.radio_button :statuses, 'Completed' %> Completed<br />
  </p>
 </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= link_to 'Back', tasks_path, class:"btn btn-outline-secondary my-2 my-sm-0" %>
+    <%= form.submit class:"btn btn-outline-primary my-2 my-sm-0" %>
   </div>
 <% end %>
+</center>
