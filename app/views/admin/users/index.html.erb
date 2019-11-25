@@ -1,0 +1,73 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fullname</th>
+      <th>Email</th>
+      <th>Telephone</th>
+      <th>Admin</th>
+      <th scope="col">No of Task</th>   
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.fullname %></td>
+        <td><%= user.email %></td>
+        <td><%= user.telephone %></td>
+        <td><%= user.admin %></td>
+
+        <td><%= user.tasks.count %></td>
+        <td><%= Task.where(user_id:user.id).count %></td>
+        <td><%= link_to 'Show', admin_user_path(user) %></td>
+        <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
+        <td><%= link_to 'Destroy', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_admin_user_path %>
+<h1 style="text-align:center;">Tasks</h1>
+<table class="table" style="width:60rem;margin-left:25rem;background-color:#4dd599">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Details</th>
+      <th scope="col">StartDate</th>
+      <th scope="col">EndDate</th>   
+      <th scope="col">Priority</th>
+      <th scope="col">Status</th>
+      <th scope="col">Action</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <th scope="row"><%= task.id %></th>
+        <td><%= task.name %></td>
+        <td><%= task.details %></td>
+        <td><%= task.startdate %></td>
+        <td><%= task.enddate %></td>
+        <td><%= task.priority %></td>
+        <td><%= task.status %></td>
+        <td>
+          <%= link_to 'Show', task, class:"btn btn-outline-success my-2 my-sm-0", style:"color:black" %>
+          <%= link_to 'Edit', edit_task_path(task), class:"btn btn-outline-primary my-2 my-sm-0",  style:"color:black" %>
+          <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger my-2 my-sm-0",  style:"color:black" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
