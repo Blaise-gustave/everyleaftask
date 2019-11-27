@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-  <p><img src="/500.png"></p>
+  
   <div class="row" style="width:60rem;">
     <div class="col-md-6">
     <%= form.label :name %>
@@ -30,6 +30,7 @@
       <%= form.label :deadline %><br>
       <%= form.date_select :enddate, class:"form-control" %>
     </div>
+
   </div>
 <div class="form-group">
    <p><%= form.label :Priority %><br>
@@ -41,6 +42,14 @@
    <%= form.radio_button :status, 'Not_started' %> Not_started  <%= form.radio_button :status, 'Undertaking' %> Undertaking <%= form.radio_button :statuses, 'Completed' %> Completed<br />
  </p>
 </div>
+<div class = "tables">
+ <% Label.all.each do |label| %>
+   <% if label.user.id == current_user.id %>
+   <%= form.label:name, label.name %>
+ <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+ <% end %>
+ <% end %>
+ </div>
 
   <div class="actions">
     <%= link_to 'Back', tasks_path, class:"btn btn-outline-secondary my-2 my-sm-0" %>

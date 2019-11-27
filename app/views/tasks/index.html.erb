@@ -1,4 +1,9 @@
 <p id="notice"><%= notice %></p>
+<%= form_tag(tasks_path, method: :get) do %>
+  Enter label name
+   <%= text_field_tag :key, params[:key] %>
+   <%= submit_tag 'Search',  class:"btn btn-success"%>
+ <% end %>
 
 <h1 style="text-align:center;">Tasks</h1>
 <table class="table" style="width:60rem;margin-left:25rem;background-color:#4dd599">
@@ -11,7 +16,9 @@
       <th scope="col">EndDate</th>
       <th scope="col">Priority</th>
       <th scope="col">Status</th>
+      <th scope="col">Labels</th>
       <th scope="col">Action</th>
+
     </tr>
   </thead>
   <tbody>
@@ -25,6 +32,7 @@
         <td><%= task.enddate %></td>
         <td><%= task.priority %></td>
         <td><%= task.status %></td>
+        <td><%= task.labels.size %></td>
         <td>
           <%= link_to 'Show', task, class:"btn btn-outline-success my-2 my-sm-0", style:"color:black" %>
           <%= link_to 'Edit', edit_task_path(task), class:"btn btn-outline-primary my-2 my-sm-0",  style:"color:black" %>

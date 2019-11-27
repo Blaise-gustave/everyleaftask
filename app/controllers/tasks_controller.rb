@@ -8,6 +8,9 @@ class TasksController < ApplicationController
       @tasks = Task.where('name LIKE ? or status LIKE ? ', "%#{params[:term]}%", "%#{params[:term]}%").page(params[:page])
     elsif params[:priority]
       @tasks = Task.all.order("priority DESC").page(params[:page])
+    elsif  params[:key]
+      @tasks= Task.joins(:labels)
+      .where("labels.name LIKE ?", "%#{params[:key]}%").page(params[:page])
 
     else
       @tasks = Task.all.order("created_at DESC").page(params[:page])
@@ -57,6 +60,6 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
     end
     def task_params
-      params.require(:task).permit(:name, :details, :status, :priority, :startdate, :enddate)
+      params.require(:task).permit(:name, :details, :status, :priority, :startdate, :enddate, label_ids:[])
     end
 end
